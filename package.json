@@ -1,0 +1,27 @@
+{
+  "name": "file-sharing",
+  "version": "1.0.0",
+  "description": "A file sharing web application ",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "server": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sharvin18/file-sharing-application.git"
+  },
+  "author": "Sharvin Dedhia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sharvin18/file-sharing-application/issues"
+  },
+  "homepage": "https://github.com/sharvin18/file-sharing-application#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^6.0.12"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14"
+  }
+}
