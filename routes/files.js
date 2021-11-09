@@ -14,7 +14,7 @@ let storage = multer.diskStorage({
 let upload = multer({
     storage: storage,
     limits:{
-        fileSize: 1000000*100
+        fileSize: 1000000*100  // File size in bytes 100mb  
     }
 }).single('uploadFile');
 
@@ -22,14 +22,23 @@ let upload = multer({
 router.post('/', (req, res) => {
 
     // Validating requests
-        if(!req.file){
-            return res.json({ error : "All fields are required."});
-        }
+    if(!req.file){
+        return res.json({ error : "All fields are required."});
+    }
 
     // Store files
+        
+    upload(req, res, (err) => {
+        if(err){
+            return res.status(500).send({ error: err.message });
+        }
+
+        // Store in database
+
+    });
 
 
-    // Store in database
+    
 
     // Send response link
 });
