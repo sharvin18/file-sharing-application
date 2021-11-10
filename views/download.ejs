@@ -3,72 +3,34 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InShare - File Sharing Made Easy</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Download | InShare - File Sharing Made Easy</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
-    <img src="./logo.png" alt="Inshare logo" class="logo">
-    <section class="upload-container">
-        <form action="">
-            <div class="drop-zone">
-                <div class="icon-container">
-                    <img src="file.svg" draggable="false" class="center" alt="File Icon">
-                    <img src="file.svg" draggable="false" class="left" alt="File Icon">
-                    <img src="file.svg" draggable="false" class="right" alt="File Icon">
-                </div>
-                <input type="file" id="fileInput">
-                <div class="title">Drop your Files here or, <span id="browseBtn">browse</span></div>
-            </div>
-        </form>
-        <div class="progress-container">
-            <div class="bg-progress"></div>
+    <!-- <img src="/img/logo.png" alt="Inshare logo" class="logo"> -->
 
-            <div class="inner-container">
-                <div class="status">Uploading...</div>
-                <div class="percent-container">
-                    <span class="percentage" id="progressPercent">0</span>%
-                </div>
-                <div class="progress-bar"></div>
-            </div>
-
+    <section class="download">
+        <img class="download__icon" src="/img/download-sd.svg" alt="inshare-download">
+        <% if(locals.error){ %>
+        <h4><%= locals.error %> 😏</h4>
+        <% } else { %>
+        <h2>Your file is ready to download</h2>
+        <p>Link expires in 24 hours</p>
+        <div class="download__meta">
+            <h4><%= fileName %></h4>
+            <small><%= parseInt(fileSize/1000) %> KB</small>
         </div>
-        <div class="sharing-container">
-            <p class="expire">Link expires in 24 hrs</p>
-
-
-            <div class="input-container">
-                <input type="text" id="fileURL" readonly>
-                <img src="./copy-icon.svg" id="copyURLBtn" alt="copy to clipboard icon">
-            </div>
-
-
-            <p class="email-info">Or Send via Email</p>
-            <div class="email-container">
-                <form id="emailForm">
-                    <div class="filed">
-                        <label for="fromEmail">Your email</label>
-                        <input type="email" autocomplete="email" required name="from-email" id="fromEmail">
-                    </div>
-
-                    <div class="filed">
-                        <label for="toEmail">Receiver's email</label>
-                        <input type="email" required autocomplete="receiver" name="to-email" id="toEmail">
-                    </div>
-                    <div class="send-btn-container">
-                        <button type="submit">Send</button>
-                    </div>
-                </form>
-            </div>
+        <div class="send-btn-container">
+            <a href="<%= downloadLink %>">Download file</a>
         </div>
+        <% } %>
     </section>
-    <div class="image-vector"></div>
-    <div class="toast">Sample message</div>
+
     <!-- github fork button -->
-    <a href="https://github.com/ShivamJoker/inshare" class="github-corner"
-        aria-label="View source on GitHub">
+    <a href="https://github.com/sharvin18" target="_blank" class="github-corner" aria-label="View source on GitHub">
         <svg width="80" height="80" viewbox="0 0 250 250"
             style="fill:#131315c9; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
             <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
@@ -82,7 +44,6 @@
             </path>
         </svg>
     </a>
-    <script src="index.js"></script>
 </body>
 
 </html>
