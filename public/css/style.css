@@ -1,7 +1,7 @@
 :root {
-  --main-bg-color: #edf5fe;
-  --light-blue: #03a9f4;
-  --dark-blue: #028bca;
+  --main-bg-color: #e7d8fc;
+  --light-purple: #6b03f4;
+  --dark-purple: #8102ca;
 }
 
 body {
@@ -42,7 +42,7 @@ section.download {
   font-size: 18px;
   padding: 8px 40px;
   margin-top: 15px;
-  background: var(--light-blue);
+  background: var(--light-purple);
   text-decoration: none;
   border: none;
   border-radius: 5px;
@@ -52,5 +52,5 @@ section.download {
 }
 
 .send-btn-container a:hover {
-    background: var(--dark-blue);
+    background: var(--dark-purple);
 }
