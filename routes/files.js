@@ -51,6 +51,7 @@ router.post('/', (req, res) => {
         const response = await file.save();
         
         // return file url
+        console.log("Yaha tak toh aa gaya");
         return res.json({ file: `${process.env.APP_BASE_URL}/files/${response.uuid}`});
 
 
