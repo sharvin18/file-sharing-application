@@ -21,6 +21,7 @@ let upload = multer({
 }).single('uploadedFile');
 
 
+// Store file and generate download page link
 router.post('/', (req, res) => {
 
     // Store files
@@ -50,17 +51,50 @@ router.post('/', (req, res) => {
         console.log(file)
         const response = await file.save();
         
-        // return file url
-        console.log("Yaha tak toh aa gaya");
+        // return download page url
         return res.json({ file: `${process.env.APP_BASE_URL}/files/${response.uuid}`});
-
-
     });
 
+});
 
+
+// Send email endpoint
+
+router.post("/email", async (req,res) => {
+
+    const {uuid, senderEmail, recieverEmail} = req.body;
+
+    if(!uuid || !senderEmail || !recieverEmail){
+        return res.status(422).send({ error: "All fields are required" });
+    }
+
+    const file = new File().findOne({ uuid: uuid });
+
+    if(file.sender){
+        return res.status(422).send({ error: "Email has already been sent" });
+    }
+
+    file.sender = senderEmail;
+    file.reciever = recieverEmail;
+
+    const response = await file.save();
     
-
-    // Send response link
+    // Send Email
+    const sendEmail = require("../services/emailService");
+    sendEmail(
+        { 
+            sender: senderEmail,
+            reciever: recieverEmail,
+            subject: "File Sharing Application",
+            text: `${senderEmail} shared a file with you`,
+            html: require("../services/emailTemplate")({
+                emailFrom: senderEmail,
+                downloadLink: `${process.env.APP_BASE_URL}/files/${file.uuid}`,
+                size: parseInt(file.size/1000)+ ' KB',
+                expires:  '24 hours' 
+            })
+        }
+    );
 });
 
 module.exports = router;
