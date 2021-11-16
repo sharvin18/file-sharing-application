@@ -17,7 +17,7 @@ const toast = document.querySelector(".toast");
 
 const baseURL = "http://localhost:3030";
 const uploadURL = `${baseURL}/api/files`;
-const emailURL = `${baseURL}/api/files/send`;
+const emailURL = `${baseURL}/api/files/email`;
 
 const maxAllowedSize = 100 * 1024 * 1024; //100mb
 
@@ -141,8 +141,8 @@ emailForm.addEventListener("submit", (e) => {
 
   const formData = {
     uuid: url.split("/").splice(-1, 1)[0],
-    emailTo: emailForm.elements["to-email"].value,
-    emailFrom: emailForm.elements["from-email"].value,
+    recieverEmail: emailForm.elements["to-email"].value,
+    senderEmail: emailForm.elements["from-email"].value,
   };
   console.log(formData);
   fetch(emailURL, {
@@ -155,6 +155,7 @@ emailForm.addEventListener("submit", (e) => {
     .then((res) => res.json())
     .then((data) => {
       if (data.success) {
+        console.log("Toast message should pop now");
         showToast("Email Sent");
         sharingContainer.style.display = "none"; // hide the box
       }
@@ -165,6 +166,7 @@ let toastTimer;
 // the toast function
 const showToast = (msg) => {
   clearTimeout(toastTimer);
+  console.log(msg);
   toast.innerText = msg;
   toast.classList.add("show");
   toastTimer = setTimeout(() => {

@@ -68,7 +68,7 @@ router.post("/email", async (req,res) => {
         return res.status(422).send({ error: "All fields are required" });
     }
 
-    const file = new File().findOne({ uuid: uuid });
+    const file = await File.findOne({ uuid: uuid });
 
     if(file.sender){
         return res.status(422).send({ error: "Email has already been sent" });
@@ -91,10 +91,13 @@ router.post("/email", async (req,res) => {
                 emailFrom: senderEmail,
                 downloadLink: `${process.env.APP_BASE_URL}/files/${file.uuid}`,
                 size: parseInt(file.size/1000)+ ' KB',
-                expires:  '24 hours' 
+                expires: '24 hours' 
             })
         }
     );
+
+    return res.send({ success: "Email sent successfully"});
+
 });
 
 module.exports = router;

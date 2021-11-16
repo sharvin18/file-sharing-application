@@ -7,6 +7,9 @@ const PORT = process.env.PORT || 3030;
 
 app.use(express.static('public'));
 
+// Allows the server to parse JSON data.
+app.use(express.json());
+
 connectDb();
 
 // Template engine
