@@ -2,6 +2,8 @@
 
 This is a file sharing web application built using NodeJs, EJS, MongoDB.
 
+## URL
+This project is hosted on Heroku. Click (here)[http://file-share-1.herokuapp.com/] and check it out.
 
 ## Installation
 
